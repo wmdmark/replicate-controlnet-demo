@@ -36,7 +36,6 @@ const testImages = [
 ];
 
 const samplePrompts = [
-  "reactiondiffusion patterns embossed,hyper detailed art station  parabolic lighting contest winners unrealengine trending on artstation,cinematic, hyper realism, high detail, octane render, 8k",
   "Illustration of a hyperrealistic , otherworldly, ultrasky scene featuring a giant crystal tree full body,very detailed and magical lighting, intricate forest details, vegetation and river around, solarpunk ,landscape, giant tree, beatifull leafy with beautiful lighting and realistic proportions, as if it were a cinematic background, 8k, highest quality, masterpiece, clouds and stars in the sky.",
   "first spring with melting snow after the impact winter post cretaceous – paleogene extinction event, life is starting to adapt to a changed world, in the style of hudson river school of art, oil on canvas",
   "An urban cityscape at night, with towering skyscrapers and neon lights casting a colorful glow over the streets below.",
@@ -45,7 +44,7 @@ const samplePrompts = [
 ];
 
 const demoData = {
-  prompt: samplePrompts[Math.floor(Math.random() * samplePrompts.length)],
+  prompt: samplePrompts[0],
   image: testImages[1],
   n_prompt:
     "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
