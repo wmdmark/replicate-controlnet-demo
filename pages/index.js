@@ -28,11 +28,23 @@ const Prediction = ({ prediction }) => {
   );
 };
 
+const testImages = [
+  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-1088-640.jpg",
+  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-512-768.jpg",
+];
+
+const samplePrompts = [
+  "reactiondiffusion patterns embossed,hyper detailed art station  parabolic lighting contest winners unrealengine trending on artstation,cinematic, hyper realism, high detail, octane render, 8k",
+  "Illustration of a hyperrealistic , otherworldly, ultrasky scene featuring a giant crystal tree full body,very detailed and magical lighting, intricate forest details, vegetation and river around, solarpunk ,landscape, giant tree, beatifull leafy with beautiful lighting and realistic proportions, as if it were a cinematic background, 8k, highest quality, masterpiece, clouds and stars in the sky.",
+  "first spring with melting snow after the impact winter post cretaceous – paleogene extinction event, life is starting to adapt to a changed world, in the style of hudson river school of art, oil on canvas",
+  "An urban cityscape at night, with towering skyscrapers and neon lights casting a colorful glow over the streets below.",
+  "a rooftop in a cyberpunk city, blade runner, nighttime, rain, intricate artwork by tooth wu and wlop and beeple, octane render, hyper realism, 8 k",
+  "victorian city, heavy rain, a beautiful painting, digital art, overdetailed art, concept art, detailed illustration, hd, 4k, digital art, highly saturated colors, Dan Mumford,  Greg rutkowski, Victo Ngai",
+];
+
 const demoData = {
-  prompt:
-    "cinematic film still high angle photo of highway highway overpass in city, highly detailed, intricate, cinematic lighting, golden hour, natural light, shallow focus, bokeh effect, 50mm lens, realistic, epic, 5k cinema still ",
-  image:
-    "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-512-768.jpg",
+  prompt: samplePrompts[Math.floor(Math.random() * samplePrompts.length)],
+  image: testImages[0],
   n_prompt:
     "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
   model_type: "canny",
@@ -42,6 +54,8 @@ const demoData = {
 export default function Home() {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
+
+  const [prompt, setPrompt] = useState(demoData.prompt);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,11 +111,25 @@ export default function Home() {
           defaultValue={demoData.image}
           placeholder="Enter controlnet image reference URL"
         />
-        <label htmlFor="prompt">Prompt</label>
+        <label htmlFor="prompt">
+          Prompt
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              // set a random prompt
+              setPrompt(
+                samplePrompts[Math.floor(Math.random() * samplePrompts.length)]
+              );
+            }}
+          >
+            🔀
+          </button>
+        </label>
         <textarea
           name="prompt"
           placeholder="Enter a prompt"
-          defaultValue={demoData.prompt}
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         />
         <label htmlFor="n_prompt">Negative prompt</label>
         <textarea

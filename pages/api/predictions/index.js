@@ -1,5 +1,10 @@
+//
 const MODEL_VERSION =
   "8ebda4c70b3ea2a2bf86e44595afb562a2cdf85525c620f1671a78113c9f325b";
+
+// depth model
+const DEPTH_MODEL_VERSION =
+  "922c7bb67b87ec32cbc2fd11b1d5f94f0ba4f5519c4dbd02856376444127cc60";
 
 export default async function handler(req, res) {
   // See  https://replicate.com/jagilley/controlnet/api for all input args
@@ -11,7 +16,8 @@ export default async function handler(req, res) {
       req.body.n_prompt ||
       "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
     prompt: req.body.prompt,
-    ddim_steps: 60,
+    scale: 7.5,
+    ddim_steps: req.body.ddim_steps || 50,
     detect_resolution: 512,
   };
   const response = await fetch("https://api.replicate.com/v1/predictions", {
