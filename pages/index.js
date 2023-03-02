@@ -71,6 +71,9 @@ export default function Home() {
         image: e.target.image.value,
         n_prompt: e.target.n_prompt.value,
         model_type: e.target.model_type.value,
+        steps: e.target.steps.value,
+        scale: e.target.scale.value,
+        eta: 1,
       }),
     });
     let prediction = await response.json();
@@ -141,6 +144,8 @@ export default function Home() {
         />
         <label htmlFor="steps">Steps</label>
         <input type="number" name="steps" defaultValue={demoData.steps} />
+        <label htmlFor="scale">Guidance Scale</label>
+        <input name="scale" type="number" step="0.1" defaultValue={7.5} />
         <label htmlFor="model_type">Model type</label>
         <select name="model_type" defaultValue={demoData.model_type}>
           <option value="depth">depth</option>

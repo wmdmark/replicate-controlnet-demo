@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       req.body.n_prompt ||
       "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
     prompt: req.body.prompt,
-    scale: 7.5,
+    scale: req.body.scale || 0.75,
     ddim_steps: req.body.ddim_steps || 50,
     detect_resolution: 512,
   };
