@@ -41,6 +41,7 @@ const samplePrompts = [
   "An urban cityscape at night, with towering skyscrapers and neon lights casting a colorful glow over the streets below.",
   "a rooftop in a cyberpunk city, blade runner, nighttime, rain, intricate artwork by tooth wu and wlop and beeple, octane render, hyper realism, 8 k",
   "victorian city, heavy rain, a beautiful painting, digital art, overdetailed art, concept art, detailed illustration, hd, 4k, digital art, highly saturated colors, Dan Mumford,  Greg rutkowski, Victo Ngai",
+  "metal logotype, epic cinematic 3d space wallpaper 4k, space particle explosion, luminous stars and lens flares, highly detailed, intricate, 5k cinema still",
 ];
 
 const demoData = {
