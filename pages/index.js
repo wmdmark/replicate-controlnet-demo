@@ -105,7 +105,7 @@ export default function Home() {
       <p>Controlnet demo.</p>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="image">Image URL</label>
+        <label htmlFor="image">Control Image URL</label>
         <input
           type="text"
           name="image"
