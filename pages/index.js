@@ -29,10 +29,10 @@ const Prediction = ({ prediction }) => {
 };
 
 const testImages = [
-  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-1365-768.jpg",
-  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-768x1365.jpg",
-  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-1088-640.jpg",
-  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-512-768.jpg",
+  "https://s3.amazonaws.com/www.pathwright.com/logo-test-wallpaper-1365-768.jpg",
+  "https://s3.amazonaws.com/www.pathwright.com/logo-test-wallpaper-768x1365.jpg",
+  "https://s3.amazonaws.com/www.pathwright.com/logo-test-wallpaper-1088-640.jpg",
+  "https://s3.amazonaws.com/www.pathwright.com/logo-test-wallpaper-512-768.jpg",
 ];
 
 const samplePrompts = [
