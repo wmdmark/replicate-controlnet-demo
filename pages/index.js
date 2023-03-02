@@ -5,6 +5,40 @@ import styles from "../styles/Home.module.css";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+const Prediction = ({ prediction }) => {
+  const { status, output, logs, percentage } = prediction;
+  let image = null;
+  let cnImage = null;
+  if (output) {
+    image = output[output.length - 1];
+    cnImage = output[output.length - 2];
+  }
+
+  if (logs) console.log(logs);
+
+  return (
+    <div className={styles.prediction}>
+      <h2>
+        Status: {status} ({Math.floor(percentage)}%)
+      </h2>
+      {image && <img src={image} />}
+      {cnImage && <img src={cnImage} />}
+      {/* {logs && <pre>{logs}</pre>} */}
+    </div>
+  );
+};
+
+const demoData = {
+  prompt:
+    "cinematic film still high angle photo of highway highway overpass in city, highly detailed, intricate, cinematic lighting, golden hour, natural light, shallow focus, bokeh effect, 50mm lens, realistic, epic, 5k cinema still ",
+  image:
+    "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-512-768.jpg",
+  n_prompt:
+    "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
+  model_type: "canny",
+  steps: 50,
+};
+
 export default function Home() {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState(null);
@@ -18,6 +52,9 @@ export default function Home() {
       },
       body: JSON.stringify({
         prompt: e.target.prompt.value,
+        image: e.target.image.value,
+        n_prompt: e.target.n_prompt.value,
+        model_type: e.target.model_type.value,
       }),
     });
     let prediction = await response.json();
@@ -38,51 +75,56 @@ export default function Home() {
         setError(prediction.detail);
         return;
       }
-      console.log({ prediction });
       setPrediction(prediction);
     }
   };
 
+  const isProcessing = prediction !== null && prediction.status !== "succeeded";
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Replicate + Next.js</title>
+        <title>Replicate + Next.js Controlnet Demo</title>
       </Head>
 
-      <p>
-        Dream something with{" "}
-        <a href="https://replicate.com/stability-ai/stable-diffusion">
-          stability-ai/stable-diffusion
-        </a>
-        :
-      </p>
+      <p>Controlnet demo.</p>
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <label htmlFor="image">Image URL</label>
         <input
           type="text"
-          name="prompt"
-          placeholder="Enter a prompt to display an image"
+          name="image"
+          defaultValue={demoData.image}
+          placeholder="Enter controlnet image reference URL"
         />
-        <button type="submit">Go!</button>
+        <label htmlFor="prompt">Prompt</label>
+        <textarea
+          name="prompt"
+          placeholder="Enter a prompt"
+          defaultValue={demoData.prompt}
+        />
+        <label htmlFor="n_prompt">Negative prompt</label>
+        <textarea
+          name="n_prompt"
+          placeholder="Enter a negative prompt"
+          defaultValue={demoData.n_prompt}
+        />
+        <label htmlFor="steps">Steps</label>
+        <input type="number" name="steps" defaultValue={demoData.steps} />
+        <label htmlFor="model_type">Model type</label>
+        <select name="model_type" defaultValue={demoData.model_type}>
+          <option value="depth">depth</option>
+          <option value="canny">canny</option>
+          <option value="hed">hed</option>
+        </select>
+        <button type="submit" disabled={isProcessing}>
+          Go!
+        </button>
       </form>
 
       {error && <div>{error}</div>}
 
-      {prediction && (
-        <div>
-          {prediction.output && (
-            <div className={styles.imageWrapper}>
-              <Image
-                fill
-                src={prediction.output[prediction.output.length - 1]}
-                alt="output"
-                sizes="100vw"
-              />
-            </div>
-          )}
-          <p>status: {prediction.status}</p>
-        </div>
-      )}
+      {prediction && <Prediction prediction={prediction} />}
     </div>
   );
 }
