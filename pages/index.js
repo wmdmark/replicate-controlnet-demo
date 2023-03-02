@@ -29,6 +29,8 @@ const Prediction = ({ prediction }) => {
 };
 
 const testImages = [
+  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-1365-768.jpg",
+  "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-768x1365.jpg",
   "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-1088-640.jpg",
   "https://s3.amazonaws.com/testing.pathwrightcdn.com/logo-test-wallpaper-512-768.jpg",
 ];
@@ -44,7 +46,7 @@ const samplePrompts = [
 
 const demoData = {
   prompt: samplePrompts[Math.floor(Math.random() * samplePrompts.length)],
-  image: testImages[0],
+  image: testImages[1],
   n_prompt:
     "blurry, blur, lowres, worst quality, low quality, low res, low resolution",
   model_type: "canny",
